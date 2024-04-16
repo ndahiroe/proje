@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Menu</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="menu-container">
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <h3 style="color: blue">Online Buying and Selling</h3>
+        ☰ Menu
+      </div>
+      <div class="menu">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Land</a></li>
+          <li><a href="houseforsale.php">Houses </a></li>
+          <li><a href="#">Car</a></li>
+          <li><a href="#">Electronics</a></li>
+        </ul>
+      </div>
+      <div class="content">
+        <!-- Your content goes here -->
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+<style>
+  .menu-container {
+    display: flex;
+    justify-content: flex-end; /* Align items to the right */
+    position: fixed;
+    width: 100%;
+    margin-top: 0px;
+  }
+
+  .menu {
+    display: none;
+    position: absolute;
+    top: 0;
+    background-color: #333;
+    height: 100vh;
+    width: 100%;
+  }
+
+  .menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .menu li {
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+
+  .menu a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+    margin-left: 120px;
+    font-size: 20px;
+  }
+  .menu-toggle {
+    cursor: pointer;
+    padding: 10px;
+    background-image: url(rock.jfif);
+    color: #fff;
+    width: 99800%;
+    margin-left: auto; /* Push toggle button to the right */
+  }
+
+  @media screen and (max-width: 768px) {
+    .menu-toggle {
+      display: block;
+      right: 0;
+
+      /* Displayed on mobile */
+    }
+
+    .content {
+      width: 100%;
+      padding-left: 0;
+    }
+
+    .menu {
+      flex-direction: column;
+      width: 140px;
+      display: none;
+      position: fixed;
+      top: 0;
+
+      height: 100%;
+
+      align-items: center;
+    }
+
+    .menu a {
+      font-size: 20px;
+      left: 0;
+      margin-left: 0px;
+    }
+    .menu.active {
+      display: block;
+    }
+
+    .menu ul {
+      margin-top: 0;
+    }
+
+    .menu li {
+      display: block;
+    }
+  }
+
+  @media screen and (min-width: 769px) {
+    .menu {
+      display: flex;
+      flex-direction: row;
+      position: static;
+      height: auto;
+      padding-top: 0;
+    }
+
+    .menu-toggle {
+      display: none; /* Hide toggle button on desktop */
+    }
+  }
+</style>
+
+<script>
+  function toggleMenu() {
+    var menu = document.querySelector(".menu");
+    var menuToggle = document.querySelector(".menu-toggle");
+
+    menu.classList.toggle("active");
+    menuToggle.classList.toggle("active"); // Add this line
+
+    // Check if menu is active, if so, hide it when a link is clicked
+    if (menu.classList.contains("active")) {
+      var menuLinks = document.querySelectorAll(".menu a");
+      menuLinks.forEach(function (link) {
+        link.addEventListener("click", function () {
+          menu.classList.remove("active");
+          menuToggle.classList.remove("active");
+        });
+      });
+    }
+  }
+</script>
